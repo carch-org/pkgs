@@ -1,2 +1,2 @@
-# pkgs
-Carch [AUR] Package Builds 📦
+# pkgbuild
+Carch [AUR] Package Build

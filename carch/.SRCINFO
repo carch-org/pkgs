@@ -1,0 +1,26 @@
+pkgbase = carch
+	pkgdesc = An automated script for quick & easy Arch Linux system setup
+	pkgver = v3.0.9
+	pkgrel = 1
+	url = https://github.com/harilvfs/carch
+	arch = any
+	license = GPL
+	depends = bash
+	depends = man-pages
+	depends = zip
+	depends = gum
+	depends = git
+	depends = sed
+	depends = xdg-user-dirs
+	depends = wget
+	depends = figlet
+	depends = pacman
+	depends = unzip
+	depends = python
+	depends = gtk3
+	conflicts = carch-git
+	options = !strip
+	source = carch-v3.0.9::https://github.com/harilvfs/carch/archive/refs/tags/v3.0.9.tar.gz
+	md5sums = SKIP
+
+pkgname = carch
