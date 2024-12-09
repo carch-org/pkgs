@@ -1,3 +1,2 @@
 [submodule "carch-github"]
-	path = carch-github
 	url = https://github.com/harilvfs/carch.git
