@@ -6,16 +6,14 @@
 <br><br>
 ![AUR Version](https://img.shields.io/aur/version/carch-git?style=for-the-badge&color=dbb6ed&logo=arch-linux&label=%5BAUR%5D%20carch-git&logocolor=85e185&labelColor=1c1c29) ![AUR Version](https://img.shields.io/aur/version/carch?style=for-the-badge&color=ef9f9c&logo=arch-linux&label=%5BAUR%5D%20carch&logocolor=85e185&labelColor=1c1c29)
 
-As arch linux aur terms 
+</div>
+
+---
 
 > [!NOTE]
 > Installing or uploading packages that act as installer scripts or customize the system in a way that diverges from the official guidelines is not allowed on the AUR.
 >
 >  As such, the package has been removed from the AUR. I respect the AUR guidelines, and I encourage you to check the main Carch project for alternative installation methods. Thank you!
-
-</div>
-
----
 
 <h4>
  
