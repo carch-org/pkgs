@@ -13,47 +13,10 @@
 >
 >  As such, the package has been removed from the AUR. I respect the AUR guidelines, and I encourage you to check the main Carch project for alternative installation methods. Thank you!
 
-<h4>
- 
-**Carch is available in the [AUR](https://aur.archlinux.org/) package repository.**
-</h4>
+> [!NOTE]
+> Carch is not available on the AUR because it is a script. However, you can use the provided package build to run Carch as a package, similar to an AUR package, or visit the Carch documentation for the CLI installer. Thank you!
 
-**[Packages](https://aur.archlinux.org/packages/)**
-
-**`carch`** **`carch-git`**
- 
- - [Carch](https://aur.archlinux.org/packages/carch) - <strong>[Stable Build]</strong>
- - [Carch-Git](https://aur.archlinux.org/packages/carch-git) - <strong>[Github Latest Build]</strong>
-
-
-<h4>
- 
-You can install it using an AUR package manager.
-
-</h4>
-
- - [`paru`](https://aur.archlinux.org/packages/paru-bin)
- 
- - [`yay`](https://aur.archlinux.org/packages/yay-bin)
-
-<h4>
- 
-Select your desire `<packager>` then
-
-</h4>
-
-```sh [<i class="devicon-archlinux-plain"></i> paru]
-paru -S carch
-#or
-paru -S carch-git
-
-```
-
-```sh [<i class="devicon-archlinuc-plain"></i> yay]
-yay -S carch
-#or
-yay -S carch-git
-```
+*Make Sure You have dependency like: `make`*
 
 ### 📦 Package Build [ Stable ]
 
