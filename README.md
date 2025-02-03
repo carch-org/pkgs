@@ -22,7 +22,7 @@
 
 ```sh [Package Build ]
 git clone https://github.com/carch-org/pkgs
-cd carch
+cd pkgs/carch
 makepkg -si
 ```
 
@@ -30,7 +30,7 @@ makepkg -si
 
 ```sh [Git Package Build ]
 git clone https://github.com/carch-org/pkgs
-cd carch-git
+cd pkgs/carch-git
 makepkg -si
 ```
 
