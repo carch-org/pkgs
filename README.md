@@ -8,7 +8,7 @@
 
 ---
 
-> [!NOTE]
+> [!INFO]
 > Installing or uploading packages that act as installer scripts or customize the system in a way that diverges from the official guidelines is not allowed on the AUR.
 >
 >  As such, the package has been removed from the AUR. I respect the AUR guidelines, and I encourage you to check the main Carch project for alternative installation methods. Thank you!
