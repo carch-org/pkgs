@@ -14,7 +14,7 @@
 >  As such, the package has been removed from the AUR. I respect the AUR guidelines, and I encourage you to check the main Carch project for alternative installation methods. Thank you!
 
 > [!NOTE]
-> Carch is not available on the AUR because it is a script. However, you can use the provided package build to run Carch as a package, similar to an AUR package, or visit the Carch documentation for the CLI installer. Thank you!
+> Carch is not available on the AUR because it is a script. However, you can use the provided package build to run Carch as a package, similar to an AUR package, or visit the Carch documentation for the CLI installer.
 
 *Assuming, You have already install dependency like: `make` & `git`*
 
