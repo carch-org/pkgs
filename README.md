@@ -55,7 +55,7 @@ yay -S carch
 yay -S carch-git
 ```
 
-### 📦 Package Build 
+### 📦 Package Build [ Stable ]
 
 ```sh [Package Build ]
 git clone https://aur.archlinux.org/carch.git
@@ -63,7 +63,7 @@ cd carch
 makepkg -si
 ```
 
-### 📦 Git Package Build
+### 📦 Git Package Build [ Latest Git-Build ]
 
 ```sh [Git Package Build ]
 git clone https://aur.archlinux.org/carch-git.git
