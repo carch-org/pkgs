@@ -1,6 +1,7 @@
 name: "Bug Report"
 description: "Report an issue with the AUR package of Carch."
-labels: [bug, aur]
+title: "[Bug]: "
+labels: ["bug", "aur"]
 assignees:
   - harilvfs
 body:

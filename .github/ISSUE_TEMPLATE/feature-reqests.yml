@@ -1,6 +1,9 @@
 name: "Feature Request"
 description: "Suggest an enhancement for the AUR package of Carch."
-labels: [enhancement, aur]
+title: "[Feature]: "
+labels: ["enhancement"]
+assignees:
+  - harilvfs
 body:
   - type: markdown
     attributes:
