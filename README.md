@@ -2,9 +2,7 @@
  
 # `Carch Aur Packages`
 
- <img src="https://img.shields.io/badge/Maintained%3F-No-1c1c29?style=for-the-badge&color=ef9f9c&logoColor=85e185&labelColor=1c1c29"> <img src="https://img.shields.io/github/license/carch-org/pkgs?style=for-the-badge&color=e0ea9d&logoColor=D9E0EE&labelColor=171b22">
-<br><br>
-![AUR Version](https://img.shields.io/aur/version/carch-git?style=for-the-badge&color=dbb6ed&logo=arch-linux&label=%5BAUR%5D%20carch-git&logocolor=85e185&labelColor=1c1c29) ![AUR Version](https://img.shields.io/aur/version/carch?style=for-the-badge&color=ef9f9c&logo=arch-linux&label=%5BAUR%5D%20carch&logocolor=85e185&labelColor=1c1c29)
+ <img src="https://img.shields.io/badge/Maintained%3F-Yes-1c1c29?style=for-the-badge&color=ef9f9c&logoColor=85e185&labelColor=1c1c29"> <img src="https://img.shields.io/github/license/carch-org/pkgs?style=for-the-badge&color=e0ea9d&logoColor=D9E0EE&labelColor=171b22">
 
 </div>
 
