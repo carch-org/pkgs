@@ -21,7 +21,7 @@
 ### 📦 Package Build [ Stable ]
 
 ```sh [Package Build ]
-git clone https://aur.archlinux.org/carch.git
+git clone https://github.com/carch-org/pkgs
 cd carch
 makepkg -si
 ```
@@ -29,7 +29,7 @@ makepkg -si
 ### 📦 Git Package Build [ Latest Git-Build ]
 
 ```sh [Git Package Build ]
-git clone https://aur.archlinux.org/carch-git.git
+git clone https://github.com/carch-org/pkgs
 cd carch-git
 makepkg -si
 ```
