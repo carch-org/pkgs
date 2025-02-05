@@ -1,6 +1,6 @@
 # Maintainer: Hari Chalise <harilvfs@chalisehari.com.np>
 pkgname="carch"
-pkgver=4.1.1
+pkgver=4.1.2
 pkgrel=2
 pkgdesc="An automated script for quick & easy Arch Linux system setup"
 arch=(any)
@@ -10,6 +10,7 @@ options=(!strip)
 depends=(
     'bash'
     'man-pages'
+    'man-db'
     'zip'
     'gum'
     'git'
@@ -19,29 +20,44 @@ depends=(
     'figlet'
     'pacman'
     'unzip'
-    'python'
-    'gtk3'
     'noto-fonts-emoji'
     'ttf-joypixels'
     'curl'
     'tar'
+    'tree-sitter'
+    'tree-sitter-bash'
+    'gcc-libs'
 )
 optdepends=(
     'bash-completion: for Bash completion support'
     'zsh: for Zsh completion support'
     'fish: for Fish completion support'
+    'ttf-nerd-fonts-symbols: symbols and icons'
 )
 conflicts=('carch-git')
-makedepends=()
+makedepends=('git' 'cargo')
 source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
 md5sums=('SKIP')
-sha256sums=('84bb856b5abbca0df9fb6ea97d86ada76ee1a85777bcd684eb14573ac9c85d63')
+sha256sums=('6f97603d0ae584b0c6ecb04813671ea14647a025266c34d0cb8827afab8691cc')
+
+prepare() {
+  echo "Version=$pkgver" >> "$pkgname.desktop"
+  cd "$pkgname-$pkgver"
+  cargo fetch --target "$(rustc -vV | sed -n 's/host: //p')"
+}
+
+build() {
+  export CARGO_TARGET_DIR=target
+  export RUSTFLAGS="-C link-arg=/usr/lib/libtree-sitter.so -C link-arg=/usr/lib/libtree-sitter-bash.so"
+  cd "$pkgname-$pkgver"
+  cargo build --frozen --release --all-features
+}
 
 package() {
 
     install -Dm755 "$srcdir/$pkgname-$pkgver/build/$pkgname" -t "$pkgdir/usr/bin/"
     
-    install -Dm755 "$srcdir/$pkgname-$pkgver/gtk/$pkgname-gtk.py" -t "$pkgdir/usr/bin/"
+    install -Dm755 "$srcdir/$pkgname-$pkgver/target/release/$pkgname-tui" -t "$pkgdir/usr/bin/"
    
     install -d "$pkgdir/usr/bin/scripts"
     rm -f "$srcdir/$pkgname-$pkgver/scripts/README"

@@ -1,7 +1,7 @@
 # Maintainer: Hari Chalise <harilvfs@chalisehari.com.np>
 pkgname=carch-git
 _pkgname=carch
-pkgver=v4.1.2.r42.gc83701c
+pkgver=v4.1.2.r46.g37a227b
 pkgrel=1
 pkgdesc="An automated script for quick & easy Arch Linux system setup"
 arch=(any)
@@ -11,6 +11,7 @@ options=(!strip)
 depends=(
     'bash'
     'man-pages'
+    'man-db'
     'zip'
     'gum'
     'git'
@@ -20,8 +21,6 @@ depends=(
     'figlet'
     'pacman'
     'unzip'
-    'python'
-    'gtk3'
     'noto-fonts-emoji'
     'ttf-joypixels'
     'curl'
