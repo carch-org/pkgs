@@ -41,9 +41,9 @@ package() {
 
     install -Dm755 "$srcdir/$pkgname-$pkgver/build/$pkgname" -t "$pkgdir/usr/bin/"
     
-    install -d "$pkgdir/usr/bin/scripts"
+    install -d "$pkgdir/usr/share/scripts"
     rm -f "$srcdir/$pkgname-$pkgver/scripts/README"
-    cp -r "$srcdir/$pkgname-$pkgver/scripts/." -t "$pkgdir/usr/bin/scripts"
+    cp -r "$srcdir/$pkgname-$pkgver/scripts/." -t "$pkgdir/usr/share/scripts"
    
     install -Dm644 "$srcdir/$pkgname-$pkgver/LICENSE" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
 

@@ -49,8 +49,8 @@ package() {
 
     install -Dm 755 ${srcdir}/${_pkgname}/build/${_pkgname} -t ${pkgdir}/usr/bin/
 
-    install -d "$pkgdir/usr/bin/scripts"
-    install -Dm 755 ${srcdir}/${_pkgname}/scripts/*.sh -t ${pkgdir}/usr/bin/scripts/
+    install -d "$pkgdir/usr/share/scripts"
+    install -Dm 755 ${srcdir}/${_pkgname}/scripts/*.sh -t ${pkgdir}/usr/share/scripts/
 
     install -Dm 644 ${srcdir}/${_pkgname}/${_pkgname}.desktop -t ${pkgdir}/usr/share/applications/
 
