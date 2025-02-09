@@ -35,7 +35,7 @@ conflicts=('carch-git')
 makedepends=()
 source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
 md5sums=('SKIP')
-sha256sums=('6f97603d0ae584b0c6ecb04813671ea14647a025266c34d0cb8827afab8691cc')
+sha256sums=('f2d7fdc38b3383f6d81e39b2267905c697b394a50bff31956227a7c397419c8c')
 
 package() {
 
