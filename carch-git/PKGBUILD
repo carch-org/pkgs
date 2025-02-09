@@ -1,9 +1,9 @@
 # Maintainer: Hari Chalise <harilvfs@chalisehari.com.np>
 pkgname=carch-git
 _pkgname=carch
-pkgver=v4.1.2.r46.g37a227b
+pkgver=v4.1.3.r46.g37a227b
 pkgrel=1
-pkgdesc="An automated script for quick & easy Arch Linux system setup"
+pkgdesc="An automated script for quick & easy Linux system setup (Arch & Fedora)"
 arch=(any)
 url="https://github.com/harilvfs/$_pkgname"
 license=('GPL')
