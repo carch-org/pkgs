@@ -5,7 +5,7 @@ on:
     branches:
       - 'main'  
     paths:
-      - 'carch-x/**'  
+      - '**'  
   workflow_dispatch:  
 
 permissions:
