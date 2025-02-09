@@ -1,44 +1,48 @@
-name: 'Update Carch Submodule'
+name: 'Update Carch-X Submodule'
 
 on:
   push:
+    branches:
+      - 'main'  # Trigger on push to the main branch
     paths:
-      - 'carch-x/**'  
-  workflow_dispatch:  
+      - 'carch-x/**'  # Detects changes in the carch-x submodule
+  workflow_dispatch:  # Allows manual triggering of the workflow
 
 permissions:
-  contents: write  
-  actions: read  
+  contents: write  # This grants read and write access to repository contents (pushes, commits, etc.)
+  actions: read  # This grants read access to actions (necessary for workflow)
 
 jobs:
   update-submodule:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout documentation repository
+      - name: Checkout carch repository
         uses: actions/checkout@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}  
+          token: ${{ secrets.GITHUB_TOKEN }}  # Use the token with the specified permissions
 
       - name: Set Git identity
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
 
-      - name: Initialize and update submodules
+      - name: Initialize and update carch-x submodule
         run: |
           git submodule init
-          git submodule update
+          git submodule update --remote carch-x  # Pull the latest commit for the carch-x submodule
 
-      - name: Pull latest changes for submodule
+      - name: Check for changes in carch-x submodule
         run: |
-          cd carch
-          git fetch --all
-          git checkout main  
-          git pull origin main  
+          if git diff --exit-code carch-x; then
+            echo "No changes in carch-x submodule."
+          else
+            echo "carch-x submodule has changes"
+          fi
 
-      - name: Commit and push changes to the docs repository
+      - name: Commit and push changes to the carch repository
         run: |
-          git add carch
-          git commit -m "Update carch submodule"
-          git push origin main  
+          git add carch-x  # Add changes from the carch-x submodule
+          git commit -m "Update carch-x submodule" || echo "No changes to commit"
+          git push origin main  # Push the updates to the main branch
+
