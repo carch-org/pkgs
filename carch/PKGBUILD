@@ -3,7 +3,7 @@ pkgname="carch"
 pkgver=4.1.4
 pkgrel=2
 pkgdesc="An automated script for quick & easy Linux system setup (Arch & Fedora)"
-arch=(any)
+arch=('x86_64' 'aarch64')
 url="https://github.com/harilvfs/$pkgname"
 license=('GPL')
 options=(!strip)
@@ -23,27 +23,42 @@ depends=(
     'noto-fonts-emoji'
     'ttf-joypixels'
     'curl'
-    'tar'
+    'tree-sitter'
+    'tree-sitter-bash'
+    'gcc-libs'
+    'glibc'
 )
 optdepends=(
     'bash-completion: for Bash completion support'
     'zsh: for Zsh completion support'
     'fish: for Fish completion support'
     'ttf-nerd-fonts-symbols: symbols and icons'
+    'ttf-jetbrains-mono: fonts'
+    'ttf-jetbrains-mono-nerd: fonts'
 )
 conflicts=('carch-git')
-makedepends=()
+makedepends=('cargo')
 source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
 md5sums=('SKIP')
 sha256sums=('99d65d41f012a194a56fa2de3f543f356fcc2e9d769f98bfc67f66c5eb941058')
 
+prepare() {
+  echo "Version=$pkgver" >> "$pkgname.desktop"
+  cd "$pkgname-$pkgver"
+  cargo fetch --target "$(rustc -vV | sed -n 's/host: //p')"
+}
+
+build() {
+  export CARGO_TARGET_DIR=target
+  export RUSTFLAGS="-C link-arg=/usr/lib/libtree-sitter.so -C link-arg=/usr/lib/libtree-sitter-bash.so"
+  cd "$pkgname-$pkgver"
+  cargo build --frozen --release --all-features
+}
+
 package() {
 
-    install -Dm755 "$srcdir/$pkgname-$pkgver/build/$pkgname" -t "$pkgdir/usr/bin/"
-    
-    install -d "$pkgdir/usr/share/scripts"
-    cp -r "$srcdir/$pkgname-$pkgver/scripts/." -t "$pkgdir/usr/share/scripts"
-   
+    install -Dm755 "$srcdir/$pkgname-$pkgver/target/release/$pkgname" -t "$pkgdir/usr/bin/"
+       
     install -Dm644 "$srcdir/$pkgname-$pkgver/LICENSE" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
 
     install -Dm644 "$srcdir/$pkgname-$pkgver/README.md" "$pkgdir/usr/share/doc/$pkgname/README.md"

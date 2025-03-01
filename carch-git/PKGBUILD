@@ -12,45 +12,58 @@ depends=(
     'bash'
     'man-pages'
     'man-db'
-    'zip'
     'gum'
     'git'
-    'sed'
-    'xdg-user-dirs'
     'wget'
+    'unzip'
     'figlet'
     'pacman'
-    'unzip'
     'noto-fonts-emoji'
     'ttf-joypixels'
     'curl'
-    'tar'
+    'tree-sitter'
+    'tree-sitter-bash'
+    'gcc-libs'
+    'glibc'
 )
 optdepends=(
     'bash-completion: for Bash completion support'
     'zsh: for Zsh completion support'
     'fish: for Fish completion support'
     'ttf-nerd-fonts-symbols: symbols and icons'
+    'ttf-jetbrains-mono: fonts'
+    'ttf-jetbrains-mono-nerd: fonts'
 )
 
 source=("git+$url")
 md5sums=('SKIP')
+sha256sums=('SKIP')
 
 conflicts=("$_pkgname")
 provides=("$_pkgname")
-makedepends=()
+makedepends=('cargo')
 
 pkgver() {
     cd "$_pkgname"
     git describe --long --tags --abbrev=7 | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
+prepare() {
+  cd "$_pkgname"
+  echo "Version=$pkgver" >> "$_pkgname.desktop"
+  cargo fetch --locked --target "$(rustc -vV | sed -n 's/host: //p')"
+}
+
+build() {
+  export CARGO_TARGET_DIR=target
+  export RUSTFLAGS="-C link-arg=/usr/lib/libtree-sitter.so -C link-arg=/usr/lib/libtree-sitter-bash.so"
+  cd "$_pkgname"
+  cargo build --frozen --release --all-features
+}
+
 package() {
 
-    install -Dm 755 ${srcdir}/${_pkgname}/build/${_pkgname} -t ${pkgdir}/usr/bin/
-
-    install -d "$pkgdir/usr/share/scripts"
-    install -Dm 755 ${srcdir}/${_pkgname}/scripts/*.sh -t ${pkgdir}/usr/share/scripts/
+    install -Dm 755 ${srcdir}/${_pkgname}/target/release/${_pkgname} -t ${pkgdir}/usr/bin/
 
     install -Dm 644 ${srcdir}/${_pkgname}/${_pkgname}.desktop -t ${pkgdir}/usr/share/applications/
 

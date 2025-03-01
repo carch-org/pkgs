@@ -1,0 +1,94 @@
+# Maintainer: Hari Chalise <harilvfs@chalisehari.com.np>
+
+_pkgname=carch
+pkgname="$_pkgname-bin"
+pkgver=v4.1.4
+pkgrel=1
+pkgdesc="An automated script for quick & easy Linux system setup (Arch & Fedora)"
+arch=('x86_64' 'aarch64')
+url="https://github.com/harilvfs/$_pkgname"
+_url_raw="https://raw.githubusercontent.com/$(echo "$url" | awk -F'/' '{print $4 "/" $5}')"
+license=('GPL')
+source_x86_64=("$_pkgname-$pkgver::$url/releases/download/$pkgver/$_pkgname"
+  "$_pkgname-$pkgver.1::$_url_raw/refs/tags/$pkgver/man/$_pkgname.1"
+  "$_pkgname-$pkgver.desktop::$_url_raw/refs/tags/$pkgver/$_pkgname.desktop"
+  "LICENSE-$pkgver::$_url_raw/refs/tags/$pkgver/LICENSE"
+  "README-$pkgver.md::$_url_raw/refs/tags/$pkgver/README.md"
+  "zsh-completion-$pkgver::$_url_raw/refs/tags/$pkgver/completions/zsh/_carch"
+  "fish-completion-$pkgver::$_url_raw/refs/tags/$pkgver/completions/fish/carch.fish"
+  "bash-completion-$pkgver::$_url_raw/refs/tags/$pkgver/completions/bash/carch")
+source_aarch64=("$_pkgname-$pkgver::$url/releases/download/$pkgver/$_pkgname-aarch64"
+  "$_pkgname-$pkgver.1::$_url_raw/refs/tags/$pkgver/man/$_pkgname.1"
+  "$_pkgname-$pkgver.desktop::$_url_raw/refs/tags/$pkgver/$_pkgname.desktop"
+  "LICENSE-$pkgver::$_url_raw/refs/tags/$pkgver/LICENSE"
+  "README-$pkgver.md::$_url_raw/refs/tags/$pkgver/README.md"
+  "zsh-completion-$pkgver::$_url_raw/refs/tags/$pkgver/completions/zsh/_carch"
+  "fish-completion-$pkgver::$_url_raw/refs/tags/$pkgver/completions/fish/carch.fish"
+  "bash-completion-$pkgver::$_url_raw/refs/tags/$pkgver/completions/bash/carch")
+sha256sums_x86_64=('9af55b6b530277d09126722174d3f1fdd35441e64cf3d398590c13469eafeb8d'
+                   '89633413d90a770e7174c3f560886e8fd5a06bcac6b72077ccb23830b28c2466'
+                   'e62a5bed2b3a5f80421827168ff10ff35388b39cf313d0a00e1f8cff841902a9'
+                   '8d353e5a8bc69b891e948bd02afc9c05c0aff00c69279ca32f7b654b387792d6'
+                   'a90fcf25870db5203115322e8438969d003591b5a1a5f66750baf9501d12cc8b'
+                   'zsh'
+                   'fish'
+                   'bash' )
+sha256sums_aarch64=('9af55b6b530277d09126722174d3f1fdd35441e64cf3d398590c13469eafeb8d'
+                    '89633413d90a770e7174c3f560886e8fd5a06bcac6b72077ccb23830b28c2466'
+                    'e62a5bed2b3a5f80421827168ff10ff35388b39cf313d0a00e1f8cff841902a9'
+                    '8d353e5a8bc69b891e948bd02afc9c05c0aff00c69279ca32f7b654b387792d6'
+                    'a90fcf25870db5203115322e8438969d003591b5a1a5f66750baf9501d12cc8b'
+                    'zsh'
+                    'fish'
+                    'bash' )
+depends=(
+    'bash'
+    'man-pages'
+    'man-db'
+    'zip'
+    'gum'
+    'git'
+    'sed'
+    'xdg-user-dirs'
+    'wget'
+    'figlet'
+    'pacman'
+    'unzip'
+    'noto-fonts-emoji'
+    'ttf-joypixels'
+    'curl'
+    'tree-sitter'
+    'tree-sitter-bash'
+    'gcc-libs'
+    'glibc'
+)
+optdepends=(
+    'bash-completion: for Bash completion support'
+    'zsh: for Zsh completion support'
+    'fish: for Fish completion support'
+    'ttf-nerd-fonts-symbols: symbols and icons'
+    'ttf-jetbrains-mono: fonts'
+    'ttf-jetbrains-mono-nerd: fonts'
+)
+
+conflicts=("$_pkgname")
+provides=("$_pkgname")
+
+prepare() {
+  echo "Version=$pkgver" >> "$_pkgname-$pkgver.desktop"
+}
+
+package() {
+  cd "$srcdir"
+
+  install -Dm0755 "$_pkgname-$pkgver" "$pkgdir/usr/bin/$_pkgname"
+  install -Dm644 "$_pkgname-$pkgver.1" "$pkgdir/usr/share/man/man1/$_pkgname.1"
+  install -Dm644 "$_pkgname-$pkgver.desktop" "$pkgdir/usr/share/applications/$_pkgname.desktop"
+  install -Dm644 "LICENSE-$pkgver" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+  install -Dm644 "README-$pkgver.md" "$pkgdir/usr/share/doc/$pkgname/README.md"
+
+  # Install shell completions
+  install -Dm644 "zsh-completion-$pkgver" "$pkgdir/usr/share/zsh/functions/Completion/Unix/_carch"
+  install -Dm644 "fish-completion-$pkgver" "$pkgdir/usr/share/fish/completions/carch.fish"
+  install -Dm644 "bash-completion-$pkgver" "$pkgdir/usr/share/bash-completion/completions/carch"
+}
