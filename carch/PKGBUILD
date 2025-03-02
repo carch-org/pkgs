@@ -1,6 +1,6 @@
 # Maintainer: Hari Chalise <harilvfs@chalisehari.com.np>
 pkgname="carch"
-pkgver=4.1.4
+pkgver=4.1.5
 pkgrel=2
 pkgdesc="An automated script for quick & easy Linux system setup (Arch & Fedora)"
 arch=('x86_64' 'aarch64')
@@ -37,7 +37,7 @@ conflicts=('carch-git')
 makedepends=('cargo')
 source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
 md5sums=('SKIP')
-sha256sums=('99d65d41f012a194a56fa2de3f543f356fcc2e9d769f98bfc67f66c5eb941058')
+sha256sums=('b8c6a385abee99e4fa645528c5421f57bf258aa05a0001ee58178962112524d6')
 
 prepare() {
   echo "Version=$pkgver" >> "$pkgname.desktop"
