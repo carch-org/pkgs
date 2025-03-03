@@ -16,7 +16,14 @@ source_x86_64=("$_pkgname-$pkgver::$url/releases/download/$pkgver/$_pkgname"
   "README-$pkgver.md::$_url_raw/refs/tags/$pkgver/README.md"
   "zsh-completion-$pkgver::$_url_raw/refs/tags/$pkgver/completions/zsh/_carch"
   "fish-completion-$pkgver::$_url_raw/refs/tags/$pkgver/completions/fish/carch.fish"
-  "bash-completion-$pkgver::$_url_raw/refs/tags/$pkgver/completions/bash/carch")
+  "bash-completion-$pkgver::$_url_raw/refs/tags/$pkgver/completions/bash/carch"
+  "icon16-$pkgver::$_url_raw/refs/heads/main/source/logo/product_logo_16.png"
+  "icon24-$pkgver::$_url_raw/refs/heads/main/source/logo/product_logo_24.png"
+  "icon32-$pkgver::$_url_raw/refs/heads/main/source/logo/product_logo_32.png"
+  "icon48-$pkgver::$_url_raw/refs/heads/main/source/logo/product_logo_48.png"
+  "icon64-$pkgver::$_url_raw/refs/heads/main/source/logo/product_logo_64.png"
+  "icon128-$pkgver::$_url_raw/refs/heads/main/source/logo/product_logo_128.png"
+  "icon256-$pkgver::$_url_raw/refs/heads/main/source/logo/product_logo_256.png")
 source_aarch64=("$_pkgname-$pkgver::$url/releases/download/$pkgver/$_pkgname-aarch64"
   "$_pkgname-$pkgver.1::$_url_raw/refs/tags/$pkgver/man/$_pkgname.1"
   "$_pkgname-$pkgver.desktop::$_url_raw/refs/tags/$pkgver/$_pkgname.desktop"
@@ -24,7 +31,14 @@ source_aarch64=("$_pkgname-$pkgver::$url/releases/download/$pkgver/$_pkgname-aar
   "README-$pkgver.md::$_url_raw/refs/tags/$pkgver/README.md"
   "zsh-completion-$pkgver::$_url_raw/refs/tags/$pkgver/completions/zsh/_carch"
   "fish-completion-$pkgver::$_url_raw/refs/tags/$pkgver/completions/fish/carch.fish"
-  "bash-completion-$pkgver::$_url_raw/refs/tags/$pkgver/completions/bash/carch")
+  "bash-completion-$pkgver::$_url_raw/refs/tags/$pkgver/completions/bash/carch"
+  "icon16-$pkgver::$_url_raw/refs/heads/main/source/logo/product_logo_16.png"
+  "icon24-$pkgver::$_url_raw/refs/heads/main/source/logo/product_logo_24.png"
+  "icon32-$pkgver::$_url_raw/refs/heads/main/source/logo/product_logo_32.png"
+  "icon48-$pkgver::$_url_raw/refs/heads/main/source/logo/product_logo_48.png"
+  "icon64-$pkgver::$_url_raw/refs/heads/main/source/logo/product_logo_64.png"
+  "icon128-$pkgver::$_url_raw/refs/heads/main/source/logo/product_logo_128.png"
+  "icon256-$pkgver::$_url_raw/refs/heads/main/source/logo/product_logo_256.png")
 sha256sums_x86_64=('079528d14953ac87dca98c04363e1da359d3b5f0b2c1a0d02b3ff62ddf2877c0'
                    'c99a996bb3c3b32ff985213753b5323125a24e08f493263541941d2cc6046d8e'
                    '98ef0615141368c4101b803878c1dd96bdb37620972da02c61d7790d73d8d3d8'
@@ -32,7 +46,14 @@ sha256sums_x86_64=('079528d14953ac87dca98c04363e1da359d3b5f0b2c1a0d02b3ff62ddf28
                    'd4a3ad07a51e737300a806bfb292026d485916fed29d7b63241f9f5e7b9de3ca'
                    'c52e711f84b317a75fa15384240f7c2dba01523b70343ac97b129fe3c40535b9'
                    '3c2204d57e31a62ae8331f116dfc8a5053b449e99cfb78d00e39b5f508ea1b9c'
-                   'f89274ce9d727f1b74c933bf2c2204309a41e54d9f453cb38b4cdeba28e12c3e' )
+                   'f89274ce9d727f1b74c933bf2c2204309a41e54d9f453cb38b4cdeba28e12c3e'
+                   'SKIP'
+                   'SKIP'
+                   'SKIP'
+                   'SKIP'
+                   'SKIP'
+                   'SKIP'
+                   'SKIP')
 sha256sums_aarch64=('f12ab75f5e62f0017c50912e811bcb8e7c34d5c10ccc8b8ed9890a23ad883cd3'
                    'c99a996bb3c3b32ff985213753b5323125a24e08f493263541941d2cc6046d8e'
                    '98ef0615141368c4101b803878c1dd96bdb37620972da02c61d7790d73d8d3d8'
@@ -40,7 +61,14 @@ sha256sums_aarch64=('f12ab75f5e62f0017c50912e811bcb8e7c34d5c10ccc8b8ed9890a23ad8
                    'd4a3ad07a51e737300a806bfb292026d485916fed29d7b63241f9f5e7b9de3ca'
                    'c52e711f84b317a75fa15384240f7c2dba01523b70343ac97b129fe3c40535b9'
                    '3c2204d57e31a62ae8331f116dfc8a5053b449e99cfb78d00e39b5f508ea1b9c'
-                   'f89274ce9d727f1b74c933bf2c2204309a41e54d9f453cb38b4cdeba28e12c3e' )
+                   'f89274ce9d727f1b74c933bf2c2204309a41e54d9f453cb38b4cdeba28e12c3e'
+                   'SKIP'
+                   'SKIP'
+                   'SKIP'
+                   'SKIP'
+                   'SKIP'
+                   'SKIP'
+                   'SKIP')
 depends=(
     'bash'
     'man-pages'
@@ -89,8 +117,8 @@ package() {
   install -Dm644 "fish-completion-$pkgver" "$pkgdir/usr/share/fish/completions/carch.fish"
   install -Dm644 "bash-completion-$pkgver" "$pkgdir/usr/share/bash-completion/completions/carch"
 
-      for size in 16x16 24x24 32x32 48x48 64x64 128x128 256x256; do
-        install -Dm644 "$srcdir/$pkgname-$pkgver/source/logo/product_logo_${size%%x*}.png" \
-            "$pkgdir/usr/share/icons/hicolor/$size/apps/carch.png"
-    done
+  for size in 16 24 32 48 64 128 256; do
+  install -Dm644 "$srcdir/icon${size}-$pkgver" \
+      "$pkgdir/usr/share/icons/hicolor/${size}x${size}/apps/carch.png"
+  done
 }
