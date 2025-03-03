@@ -88,4 +88,9 @@ package() {
   install -Dm644 "zsh-completion-$pkgver" "$pkgdir/usr/share/zsh/functions/Completion/Unix/_carch"
   install -Dm644 "fish-completion-$pkgver" "$pkgdir/usr/share/fish/completions/carch.fish"
   install -Dm644 "bash-completion-$pkgver" "$pkgdir/usr/share/bash-completion/completions/carch"
+
+      for size in 16x16 24x24 32x32 48x48 64x64 128x128 256x256; do
+        install -Dm644 "$srcdir/$pkgname-$pkgver/source/logo/product_logo_${size%%x*}.png" \
+            "$pkgdir/usr/share/icons/hicolor/$size/apps/carch.png"
+    done
 }
