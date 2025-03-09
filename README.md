@@ -1,6 +1,6 @@
 <div align="center">
  
-# `Carch Package Builds`
+# Carch Package Builds
 
  <img src="https://img.shields.io/badge/Maintained%3F-Yes%20(Except%20Carch--Bin)-1c1c29?style=for-the-badge&color=ef9f9c&logoColor=85e185&labelColor=1c1c29">
  <img src="https://img.shields.io/github/license/carch-org/pkgs?style=for-the-badge&color=e0ea9d&logoColor=D9E0EE&labelColor=171b22">
