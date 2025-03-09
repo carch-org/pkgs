@@ -1,8 +1,10 @@
 <div align="center">
  
-# `Carch Aur Packages`
+# `Carch Package Builds`
 
  <img src="https://img.shields.io/badge/Maintained%3F-Yes-1c1c29?style=for-the-badge&color=ef9f9c&logoColor=85e185&labelColor=1c1c29"> <img src="https://img.shields.io/github/license/carch-org/pkgs?style=for-the-badge&color=e0ea9d&logoColor=D9E0EE&labelColor=171b22">
+
+[carch-bin](https://github.com/carch-org/pkgs/tree/main/carch-bin) is no longer maintain
 
 </div>
 
@@ -14,7 +16,7 @@
 >  As such, the package has been removed from the AUR. I respect the AUR guidelines, and I encourage you to check the main Carch project for alternative installation methods. Thank you!
 
 > [!NOTE]
-> Carch is not available on the AUR because it is a script. However, you can use the provided package build to run Carch as a package, similar to an AUR package, or visit the Carch documentation for the CLI installer.
+> Carch is not available on the AUR because it is a script. However, you can use the provided package build to run Carch as a package, similar to an AUR package, or visit the Carch [documentation](https://carch-org.github.io/docs) for the CLI installer.
 
 *Assuming, You have already install dependency like: `make` & `git`*
 
