@@ -1,6 +1,6 @@
 pkgbase = carch-git
 	pkgdesc = An automated script for quick & easy Linux system setup (Arch & Fedora)
-	pkgver = v4.1.7.r5.gb9d82b1
+	pkgver = v4.2.1.r10.g14a0d17
 	pkgrel = 1
 	url = https://github.com/harilvfs/carch
 	arch = any
