@@ -1,4 +1,5 @@
 # Maintainer: Hari Chalise <harilvfs@chalisehari.com.np>
+# No Longer Maintained
 
 _pkgname=carch
 pkgname="$_pkgname-bin"
