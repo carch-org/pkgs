@@ -13,6 +13,7 @@ depends=(
     'man-pages'
     'man-db'
     'gum'
+    'fzf'
     'git'
     'wget'
     'unzip'
