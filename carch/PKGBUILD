@@ -38,7 +38,7 @@ conflicts=('carch-git')
 makedepends=('cargo')
 source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
 md5sums=('SKIP')
-sha256sums=('f34f63dbe6a7364bfc33418779847a752616e689e98f00766094dda64d7fdc12')
+sha256sums=('3ddad0e447222303ad5c36c82cfbacbdce5de55efc2f7ecdd97895ac35dabe3c')
 
 prepare() {
   echo "Version=$pkgver" >> "$pkgname.desktop"
