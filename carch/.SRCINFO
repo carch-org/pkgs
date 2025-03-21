@@ -10,7 +10,6 @@ pkgbase = carch
 	depends = bash
 	depends = man-pages
 	depends = man-db
-	depends = gum
 	depends = fzf
 	depends = git
 	depends = wget

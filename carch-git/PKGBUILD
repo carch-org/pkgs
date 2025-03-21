@@ -12,7 +12,6 @@ depends=(
     'bash'
     'man-pages'
     'man-db'
-    'gum'
     'fzf'
     'git'
     'wget'
