@@ -80,7 +80,7 @@ package() {
     install -Dm 644 ${srcdir}/${_pkgname}/completions/fish/${_pkgname}.fish -t ${pkgdir}/usr/share/fish/completions/
 
     for size in 16x16 24x24 32x32 48x48 64x64 128x128 256x256; do
-        install -Dm644 "$srcdir/$_pkgname/source/logo/product_logo_${size%%x*}.png" \
+        install -Dm644 "$srcdir/$_pkgname/assets/icons/product_logo_${size%%x*}.png" \
             "$pkgdir/usr/share/icons/hicolor/$size/apps/$_pkgname.png"
     done
 }
