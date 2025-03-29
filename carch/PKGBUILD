@@ -71,7 +71,7 @@ package() {
     install -Dm644 "$srcdir/$pkgname-$pkgver/completions/fish/$pkgname.fish" "$pkgdir/usr/share/fish/completions/$pkgname.fish"
 
     for size in 16x16 24x24 32x32 48x48 64x64 128x128 256x256; do
-        install -Dm644 "$srcdir/$pkgname-$pkgver/source/logo/product_logo_${size%%x*}.png" \
+        install -Dm644 "$srcdir/$pkgname-$pkgver/assets/icons/product_logo_${size%%x*}.png" \
             "$pkgdir/usr/share/icons/hicolor/$size/apps/carch.png"
     done
 }
