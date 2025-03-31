@@ -1,6 +1,6 @@
 pkgbase = carch
 	pkgdesc = An automated script for quick & easy Linux system setup (Arch & Fedora)
-	pkgver = 4.2.5
+	pkgver = 4.2.6
 	pkgrel = 1
 	url = https://github.com/harilvfs/carch
 	arch = x86_64
@@ -31,8 +31,8 @@ pkgbase = carch
 	optdepends = ttf-jetbrains-mono-nerd: fonts
 	conflicts = carch-git
 	options = !strip
-	source = carch-4.2.5.tar.gz::https://github.com/harilvfs/carch/archive/refs/tags/v4.2.5.tar.gz
+	source = carch-4.2.6.tar.gz::https://github.com/harilvfs/carch/archive/refs/tags/v4.2.6.tar.gz
 	md5sums = SKIP
-	sha256sums = 82b7f8788504b9d49817b1446170d718cb13ca2ebb14bb37a156299729facf4b
+	sha256sums = 87403da5d4980a87b16635027f0252f4d6caf1e85f4c00fdf59afa411e6d59ac
 
 pkgname = carch
