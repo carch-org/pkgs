@@ -1,4 +1,4 @@
-# Maintainer: Hari Chalise <harilvfs@chalisehari.com.np>
+
 pkgname="carch"
 pkgver=4.2.7
 pkgrel=1
@@ -62,7 +62,7 @@ package() {
     
     install -Dm644 "$srcdir/$pkgname-$pkgver/$pkgname.desktop" "$pkgdir/usr/share/applications/$pkgname.desktop"
 
-    install -Dm644 "$srcdir/$pkgname-$pkgver/man/$pkgname.1" "$pkgdir/usr/share/man/man.1/$pkgname.1"
+    install -Dm644 "$srcdir/$pkgname-$pkgver/man/$pkgname.1" "$pkgdir/usr/share/man/man1/$pkgname.1"
 
     install -Dm644 "$srcdir/$pkgname-$pkgver/completions/bash/$pkgname" "$pkgdir/usr/share/bash-completion/completions/$pkgname"
 
