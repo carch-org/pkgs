@@ -1,6 +1,6 @@
 # Maintainer: Hari Chalise <harilvfs@chalisehari.com.np>
 pkgname="carch"
-pkgver=4.2.6
+pkgver=4.2.7
 pkgrel=1
 pkgdesc="An automated script for quick & easy Linux system setup (Arch & Fedora)"
 arch=('x86_64' 'aarch64')
