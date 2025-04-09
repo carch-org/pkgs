@@ -1,9 +1,9 @@
 name: Update CARCH PKGBUILD
 
 on:
-  workflow_dispatch:
+  workflow_dispatch:  # Allow manual triggering
   schedule:
-    - cron: '0 */12 * * *'
+    - cron: '0 */12 * * *'  # Check twice a day for new releases
 
 jobs:
   update-pkgbuild:
@@ -11,29 +11,37 @@ jobs:
     container:
       image: archlinux:latest
     permissions:
-      contents: write
+      contents: write  # Needed for pushing changes
     
     steps:
       - name: Install necessary packages
         run: |
           pacman -Syu --noconfirm
-          pacman -S --noconfirm git wget base-devel make pacman-contrib less
+          pacman -S --noconfirm git wget base-devel sudo
+
+      # Create a non-root user for building packages
+      - name: Setup build user
+        run: |
+          useradd -m builder
+          echo "builder ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+          mkdir -p /home/builder/work
+          chown -R builder:builder /home/builder
 
       - name: Checkout pkgs repository
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          path: /home/builder/work/pkgs
         
-      - name: Get latest release from harilvfs/carch
-        id: latest_release
+      - name: Get latest release info from harilvfs/carch
         run: |
+          cd /home/builder/work
           LATEST_RELEASE=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
             "https://api.github.com/repos/harilvfs/carch/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
           echo "RELEASE=$LATEST_RELEASE" >> $GITHUB_ENV
           echo "Latest release: $LATEST_RELEASE"
           
       - name: Extract version number
-        id: version
         run: |
           VERSION="${{ env.RELEASE }}"
           VERSION="${VERSION#v}"  # Remove the 'v' prefix
@@ -42,20 +50,22 @@ jobs:
           
       - name: Download latest release tar file
         run: |
+          cd /home/builder/work
           TAR_URL="https://github.com/harilvfs/carch/archive/refs/tags/v$VERSION.tar.gz"
           echo "Downloading from: $TAR_URL"
           wget -q "$TAR_URL" -O "carch-$VERSION.tar.gz"
+          chown builder:builder "carch-$VERSION.tar.gz"
           
       - name: Calculate SHA256 checksum
-        id: checksum
         run: |
+          cd /home/builder/work
           NEW_CHECKSUM=$(sha256sum "carch-$VERSION.tar.gz" | awk '{print $1}')
           echo "NEW_CHECKSUM=$NEW_CHECKSUM" >> $GITHUB_ENV
           echo "New checksum: $NEW_CHECKSUM"
           
-      - name: Check PKGBUILD
-        id: check_pkgbuild
+      - name: Check PKGBUILD file
         run: |
+          cd /home/builder/work/pkgs
           CURRENT_VERSION=$(grep -P "^pkgver=.*$" carch/PKGBUILD | cut -d'=' -f2)
           CURRENT_CHECKSUM=$(grep -P "^sha256sums=.*$" carch/PKGBUILD | grep -oP "'[^']*'" | tr -d "'")
           
@@ -70,13 +80,18 @@ jobs:
           
       - name: Update PKGBUILD and generate SRCINFO
         if: env.UPDATE_NEEDED == 'true'
-        working-directory: carch
         run: |
+          cd /home/builder/work/pkgs/carch
+          
+          # Update the version
           sed -i "s/^pkgver=.*$/pkgver=$VERSION/" PKGBUILD
           
+          # Update the checksum
           sed -i "s/^sha256sums=.*$/sha256sums=('$NEW_CHECKSUM')/" PKGBUILD
           
-          makepkg --printsrcinfo > .SRCINFO
+          # Set permissions and generate .SRCINFO as non-root user
+          chown -R builder:builder .
+          su - builder -c "cd /home/builder/work/pkgs/carch && makepkg --printsrcinfo > .SRCINFO"
           
           echo "PKGBUILD updated with new version $VERSION and checksum $NEW_CHECKSUM"
           echo "Generated .SRCINFO file"
@@ -84,6 +99,7 @@ jobs:
       - name: Commit and push changes
         if: env.UPDATE_NEEDED == 'true'
         run: |
+          cd /home/builder/work/pkgs
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add carch/PKGBUILD carch/.SRCINFO
