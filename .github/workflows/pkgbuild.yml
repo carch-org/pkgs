@@ -8,34 +8,25 @@ on:
 jobs:
   update-pkgbuild:
     runs-on: ubuntu-latest
-    container:
-      image: archlinux:latest
     permissions:
       contents: write  # Needed for pushing changes
     
     steps:
-      - name: Install necessary packages
-        run: |
-          pacman -Syu --noconfirm
-          pacman -S --noconfirm git wget base-devel sudo
-
-      # Create a non-root user for building packages
-      - name: Setup build user
-        run: |
-          useradd -m builder
-          echo "builder ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-          # Make the builder user own the GitHub workspace
-          chown -R builder:builder $GITHUB_WORKSPACE
-
       - name: Checkout pkgs repository
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Set up Arch Linux environment
+        uses: docker://archlinux:latest
+        with:
+          entrypoint: /bin/bash
+          args: -c "pacman -Syu --noconfirm && pacman -S --noconfirm git wget base-devel sudo"
         
       - name: Get latest release info from harilvfs/carch
+        id: latest_release
         run: |
-          LATEST_RELEASE=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            "https://api.github.com/repos/harilvfs/carch/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+          LATEST_RELEASE=$(curl -s "https://api.github.com/repos/harilvfs/carch/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
           echo "RELEASE=$LATEST_RELEASE" >> $GITHUB_ENV
           echo "Latest release: $LATEST_RELEASE"
           
@@ -51,7 +42,6 @@ jobs:
           TAR_URL="https://github.com/harilvfs/carch/archive/refs/tags/v$VERSION.tar.gz"
           echo "Downloading from: $TAR_URL"
           wget -q "$TAR_URL" -O "carch-$VERSION.tar.gz"
-          chown builder:builder "carch-$VERSION.tar.gz"
           
       - name: Calculate SHA256 checksum
         run: |
@@ -78,7 +68,7 @@ jobs:
             exit 1
           fi
           
-      - name: Update PKGBUILD and generate SRCINFO
+      - name: Update PKGBUILD
         if: env.UPDATE_NEEDED == 'true'
         run: |
           cd carch
@@ -89,18 +79,20 @@ jobs:
           # Update the checksum
           sed -i "s/^sha256sums=.*$/sha256sums=('$NEW_CHECKSUM')/" PKGBUILD
           
-          # Set permissions and generate .SRCINFO as non-root user
-          chown -R builder:builder .
-          su - builder -c "cd $GITHUB_WORKSPACE/carch && makepkg --printsrcinfo > .SRCINFO"
-          
           echo "PKGBUILD updated with new version $VERSION and checksum $NEW_CHECKSUM"
-          echo "Generated .SRCINFO file"
+          
+      - name: Generate SRCINFO
+        if: env.UPDATE_NEEDED == 'true'
+        uses: docker://archlinux:latest
+        with:
+          entrypoint: /bin/bash
+          args: -c "pacman -Syu --noconfirm && pacman -S --noconfirm base-devel && cd /github/workspace/carch && useradd -m builder && chown -R builder:builder . && su builder -c 'makepkg --printsrcinfo > .SRCINFO'"
           
       - name: Commit and push changes
         if: env.UPDATE_NEEDED == 'true'
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
           git add carch/PKGBUILD carch/.SRCINFO
           git commit -m "Update carch to version $VERSION"
           git push
