@@ -24,18 +24,16 @@ jobs:
         run: |
           useradd -m builder
           echo "builder ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-          mkdir -p /home/builder/work
-          chown -R builder:builder /home/builder
+          # Make the builder user own the GitHub workspace
+          chown -R builder:builder $GITHUB_WORKSPACE
 
       - name: Checkout pkgs repository
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          path: /home/builder/work/pkgs
         
       - name: Get latest release info from harilvfs/carch
         run: |
-          cd /home/builder/work
           LATEST_RELEASE=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
             "https://api.github.com/repos/harilvfs/carch/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
           echo "RELEASE=$LATEST_RELEASE" >> $GITHUB_ENV
@@ -50,7 +48,6 @@ jobs:
           
       - name: Download latest release tar file
         run: |
-          cd /home/builder/work
           TAR_URL="https://github.com/harilvfs/carch/archive/refs/tags/v$VERSION.tar.gz"
           echo "Downloading from: $TAR_URL"
           wget -q "$TAR_URL" -O "carch-$VERSION.tar.gz"
@@ -58,30 +55,33 @@ jobs:
           
       - name: Calculate SHA256 checksum
         run: |
-          cd /home/builder/work
           NEW_CHECKSUM=$(sha256sum "carch-$VERSION.tar.gz" | awk '{print $1}')
           echo "NEW_CHECKSUM=$NEW_CHECKSUM" >> $GITHUB_ENV
           echo "New checksum: $NEW_CHECKSUM"
           
       - name: Check PKGBUILD file
         run: |
-          cd /home/builder/work/pkgs
-          CURRENT_VERSION=$(grep -P "^pkgver=.*$" carch/PKGBUILD | cut -d'=' -f2)
-          CURRENT_CHECKSUM=$(grep -P "^sha256sums=.*$" carch/PKGBUILD | grep -oP "'[^']*'" | tr -d "'")
-          
-          echo "Current version in PKGBUILD: $CURRENT_VERSION"
-          echo "Current checksum in PKGBUILD: $CURRENT_CHECKSUM"
-          
-          if [ "$CURRENT_VERSION" != "$VERSION" ] || [ "$CURRENT_CHECKSUM" != "$NEW_CHECKSUM" ]; then
-            echo "UPDATE_NEEDED=true" >> $GITHUB_ENV
+          if [ -f "carch/PKGBUILD" ]; then
+            CURRENT_VERSION=$(grep -P "^pkgver=.*$" carch/PKGBUILD | cut -d'=' -f2)
+            CURRENT_CHECKSUM=$(grep -P "^sha256sums=.*$" carch/PKGBUILD | grep -oP "'[^']*'" | tr -d "'")
+            
+            echo "Current version in PKGBUILD: $CURRENT_VERSION"
+            echo "Current checksum in PKGBUILD: $CURRENT_CHECKSUM"
+            
+            if [ "$CURRENT_VERSION" != "$VERSION" ] || [ "$CURRENT_CHECKSUM" != "$NEW_CHECKSUM" ]; then
+              echo "UPDATE_NEEDED=true" >> $GITHUB_ENV
+            else
+              echo "UPDATE_NEEDED=false" >> $GITHUB_ENV
+            fi
           else
-            echo "UPDATE_NEEDED=false" >> $GITHUB_ENV
+            echo "PKGBUILD file not found, cannot check versions"
+            exit 1
           fi
           
       - name: Update PKGBUILD and generate SRCINFO
         if: env.UPDATE_NEEDED == 'true'
         run: |
-          cd /home/builder/work/pkgs/carch
+          cd carch
           
           # Update the version
           sed -i "s/^pkgver=.*$/pkgver=$VERSION/" PKGBUILD
@@ -91,7 +91,7 @@ jobs:
           
           # Set permissions and generate .SRCINFO as non-root user
           chown -R builder:builder .
-          su - builder -c "cd /home/builder/work/pkgs/carch && makepkg --printsrcinfo > .SRCINFO"
+          su - builder -c "cd $GITHUB_WORKSPACE/carch && makepkg --printsrcinfo > .SRCINFO"
           
           echo "PKGBUILD updated with new version $VERSION and checksum $NEW_CHECKSUM"
           echo "Generated .SRCINFO file"
@@ -99,7 +99,6 @@ jobs:
       - name: Commit and push changes
         if: env.UPDATE_NEEDED == 'true'
         run: |
-          cd /home/builder/work/pkgs
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add carch/PKGBUILD carch/.SRCINFO
