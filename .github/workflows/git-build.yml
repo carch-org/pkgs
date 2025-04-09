@@ -1,0 +1,66 @@
+name: Build CARCH Package
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux:latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Install dependencies
+        run: |
+          pacman -Syu --noconfirm
+          pacman -S --noconfirm git base-devel make sudo fakeroot
+
+      - name: Setup build user
+        run: |
+          useradd -m builder
+          echo "builder ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+          chown -R builder:builder /github/workspace
+
+      - name: Checkout pkgs repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: pkgs
+
+      - name: Build and install package
+        run: |
+          cd pkgs
+          
+          # Make build directory owned by builder
+          chown -R builder:builder .
+          
+          su builder -c "cd carch-git && makepkg -si --noconfirm"
+          
+          if pacman -Q carch-git &>/dev/null; then
+            echo "Package carch-git was successfully installed"
+          else
+            echo "Failed to install package carch-git"
+            exit 1
+          fi
+
+      - name: Update .SRCINFO
+        run: |
+          cd pkgs/carch-git
+          su builder -c "makepkg --printsrcinfo > .SRCINFO"
+          
+      - name: Commit and push changes
+        run: |
+          cd pkgs
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          if git status --porcelain | grep -q .; then
+            git add carch-git/PKGBUILD carch-git/.SRCINFO
+            git commit -m "Update carch-git package"
+            git push
+            echo "Changes committed and pushed to repository"
+          else
+            echo "No changes to commit"
+          fi
