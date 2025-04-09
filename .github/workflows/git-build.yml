@@ -15,25 +15,27 @@ jobs:
           pacman -Syu --noconfirm
           pacman -S --noconfirm git base-devel make sudo fakeroot
       
+      - name: Create working directory
+        run: |
+          mkdir -p /build
+      
       - name: Checkout pkgs repository
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          path: pkgs
+          path: /build/pkgs
       
       - name: Setup build user
         run: |
           useradd -m builder
           echo "builder ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-          chown -R builder:builder ${{ github.workspace }}
+          chown -R builder:builder /build
       
       - name: Build and install package
         run: |
-          cd pkgs
+          cd /build/pkgs
           
-          # Make build directory owned by builder
-          chown -R builder:builder .
-          
+          # Already owned by builder from previous step
           su builder -c "cd carch-git && makepkg -si --noconfirm"
           
           if pacman -Q carch-git &>/dev/null; then
@@ -45,12 +47,12 @@ jobs:
       
       - name: Update .SRCINFO
         run: |
-          cd pkgs/carch-git
+          cd /build/pkgs/carch-git
           su builder -c "makepkg --printsrcinfo > .SRCINFO"
           
       - name: Commit and push changes
         run: |
-          cd pkgs
+          cd /build/pkgs
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           
