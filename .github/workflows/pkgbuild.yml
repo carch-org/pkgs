@@ -1,7 +1,7 @@
-name: Update CARCH PKGBUILD
+name: Update PKGBUILD
 
 on:
-  workflow_dispatch:  # Allow manual triggering
+  workflow_dispatch:
   schedule:
     - cron: '0 */12 * * *'  # Check twice a day for new releases
 
@@ -9,7 +9,7 @@ jobs:
   update-pkgbuild:
     runs-on: ubuntu-latest
     permissions:
-      contents: write  # Needed for pushing changes
+      contents: write
     
     steps:
       - name: Checkout pkgs repository
@@ -23,7 +23,7 @@ jobs:
           entrypoint: /bin/bash
           args: -c "pacman -Syu --noconfirm && pacman -S --noconfirm git wget base-devel sudo"
         
-      - name: Get latest release info from harilvfs/carch
+      - name: Get latest release from harilvfs/carch
         id: latest_release
         run: |
           LATEST_RELEASE=$(curl -s "https://api.github.com/repos/harilvfs/carch/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
@@ -73,10 +73,8 @@ jobs:
         run: |
           cd carch
           
-          # Update the version
           sed -i "s/^pkgver=.*$/pkgver=$VERSION/" PKGBUILD
           
-          # Update the checksum
           sed -i "s/^sha256sums=.*$/sha256sums=('$NEW_CHECKSUM')/" PKGBUILD
           
           echo "PKGBUILD updated with new version $VERSION and checksum $NEW_CHECKSUM"
