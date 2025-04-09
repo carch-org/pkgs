@@ -1,0 +1,94 @@
+name: Update CARCH PKGBUILD
+
+on:
+  workflow_dispatch:  # Allow manual triggering
+  schedule:
+    - cron: '0 */12 * * *'  # Check twice a day for new releases
+
+jobs:
+  update-pkgbuild:
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux:latest
+    permissions:
+      contents: write  # Needed for pushing changes
+    
+    steps:
+      - name: Install necessary packages
+        run: |
+          pacman -Syu --noconfirm
+          pacman -S --noconfirm git wget base-devel makepkg-template pacman-contrib less
+
+      - name: Checkout pkgs repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+        
+      - name: Get latest release info from harilvfs/carch
+        id: latest_release
+        run: |
+          LATEST_RELEASE=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/repos/harilvfs/carch/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+          echo "RELEASE=$LATEST_RELEASE" >> $GITHUB_ENV
+          echo "Latest release: $LATEST_RELEASE"
+          
+      - name: Extract version number
+        id: version
+        run: |
+          VERSION="${{ env.RELEASE }}"
+          VERSION="${VERSION#v}"  # Remove the 'v' prefix
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "Current version: $VERSION"
+          
+      - name: Download latest release tar file
+        run: |
+          TAR_URL="https://github.com/harilvfs/carch/archive/refs/tags/v$VERSION.tar.gz"
+          echo "Downloading from: $TAR_URL"
+          wget -q "$TAR_URL" -O "carch-$VERSION.tar.gz"
+          
+      - name: Calculate SHA256 checksum
+        id: checksum
+        run: |
+          NEW_CHECKSUM=$(sha256sum "carch-$VERSION.tar.gz" | awk '{print $1}')
+          echo "NEW_CHECKSUM=$NEW_CHECKSUM" >> $GITHUB_ENV
+          echo "New checksum: $NEW_CHECKSUM"
+          
+      - name: Check PKGBUILD file
+        id: check_pkgbuild
+        run: |
+          CURRENT_VERSION=$(grep -P "^pkgver=.*$" carch/PKGBUILD | cut -d'=' -f2)
+          CURRENT_CHECKSUM=$(grep -P "^sha256sums=.*$" carch/PKGBUILD | grep -oP "'[^']*'" | tr -d "'")
+          
+          echo "Current version in PKGBUILD: $CURRENT_VERSION"
+          echo "Current checksum in PKGBUILD: $CURRENT_CHECKSUM"
+          
+          if [ "$CURRENT_VERSION" != "$VERSION" ] || [ "$CURRENT_CHECKSUM" != "$NEW_CHECKSUM" ]; then
+            echo "UPDATE_NEEDED=true" >> $GITHUB_ENV
+          else
+            echo "UPDATE_NEEDED=false" >> $GITHUB_ENV
+          fi
+          
+      - name: Update PKGBUILD and generate SRCINFO
+        if: env.UPDATE_NEEDED == 'true'
+        working-directory: carch
+        run: |
+          # Update the version
+          sed -i "s/^pkgver=.*$/pkgver=$VERSION/" PKGBUILD
+          
+          # Update the checksum
+          sed -i "s/^sha256sums=.*$/sha256sums=('$NEW_CHECKSUM')/" PKGBUILD
+          
+          # Generate .SRCINFO
+          makepkg --printsrcinfo > .SRCINFO
+          
+          echo "PKGBUILD updated with new version $VERSION and checksum $NEW_CHECKSUM"
+          echo "Generated .SRCINFO file"
+          
+      - name: Commit and push changes
+        if: env.UPDATE_NEEDED == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add carch/PKGBUILD carch/.SRCINFO
+          git commit -m "Update carch to version $VERSION"
+          git push
