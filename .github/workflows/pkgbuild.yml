@@ -1,9 +1,9 @@
 name: Update CARCH PKGBUILD
 
 on:
-  workflow_dispatch:  # Allow manual triggering
+  workflow_dispatch:
   schedule:
-    - cron: '0 */12 * * *'  # Check twice a day for new releases
+    - cron: '0 */12 * * *'
 
 jobs:
   update-pkgbuild:
@@ -11,7 +11,7 @@ jobs:
     container:
       image: archlinux:latest
     permissions:
-      contents: write  # Needed for pushing changes
+      contents: write
     
     steps:
       - name: Install necessary packages
@@ -24,7 +24,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
         
-      - name: Get latest release info from harilvfs/carch
+      - name: Get latest release from harilvfs/carch
         id: latest_release
         run: |
           LATEST_RELEASE=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
@@ -53,7 +53,7 @@ jobs:
           echo "NEW_CHECKSUM=$NEW_CHECKSUM" >> $GITHUB_ENV
           echo "New checksum: $NEW_CHECKSUM"
           
-      - name: Check PKGBUILD file
+      - name: Check PKGBUILD
         id: check_pkgbuild
         run: |
           CURRENT_VERSION=$(grep -P "^pkgver=.*$" carch/PKGBUILD | cut -d'=' -f2)
@@ -72,13 +72,10 @@ jobs:
         if: env.UPDATE_NEEDED == 'true'
         working-directory: carch
         run: |
-          # Update the version
           sed -i "s/^pkgver=.*$/pkgver=$VERSION/" PKGBUILD
           
-          # Update the checksum
           sed -i "s/^sha256sums=.*$/sha256sums=('$NEW_CHECKSUM')/" PKGBUILD
           
-          # Generate .SRCINFO
           makepkg --printsrcinfo > .SRCINFO
           
           echo "PKGBUILD updated with new version $VERSION and checksum $NEW_CHECKSUM"
