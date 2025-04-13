@@ -61,9 +61,9 @@ package() {
 
     install -Dm644 "$srcdir/$pkgname-$pkgver/completions/bash/$pkgname" "$pkgdir/usr/share/bash-completion/completions/$pkgname"
 
-    install -Dm644 "$srcdir/$pkgname-$pkgver/completions/zsh/_$pkgname" "$pkgdir/usr/share/zsh/functions/Completion/Unix/_$pkgname"
+    install -Dm644 "$srcdir/$pkgname-$pkgver/completions/zsh/_$pkgname" "$pkgdir/usr/share/zsh/site-functions/_$pkgname"
 
-    install -Dm644 "$srcdir/$pkgname-$pkgver/completions/fish/$pkgname.fish" "$pkgdir/usr/share/fish/completions/$pkgname.fish"
+    install -Dm644 "$srcdir/$pkgname-$pkgver/completions/fish/$pkgname.fish" "$pkgdir/usr/share/fish/vendor_completions.d/$pkgname.fish"
 
     for size in 16x16 24x24 32x32 48x48 64x64 128x128 256x256; do
         install -Dm644 "$srcdir/$pkgname-$pkgver/assets/icons/product_logo_${size%%x*}.png" \
