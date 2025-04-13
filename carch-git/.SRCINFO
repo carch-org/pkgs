@@ -1,6 +1,6 @@
 pkgbase = carch-git
 	pkgdesc = A Simple Script to Make Linux System Setups Easier
-	pkgver = v4.3.1.r2.g4ed8674
+	pkgver = v4.3.2.r0.g0a5ae57
 	pkgrel = 1
 	url = https://github.com/harilvfs/carch
 	arch = any
