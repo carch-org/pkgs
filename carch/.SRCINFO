@@ -1,6 +1,6 @@
 pkgbase = carch
 	pkgdesc = A Simple Script to Make Linux System Setups Easier
-	pkgver = 4.3.1
+	pkgver = 4.3.2
 	pkgrel = 1
 	url = https://github.com/harilvfs/carch
 	arch = x86_64
@@ -26,8 +26,8 @@ pkgbase = carch
 	optdepends = ttf-jetbrains-mono-nerd: fonts
 	conflicts = carch-git
 	options = !strip
-	source = carch-4.3.1.tar.gz::https://github.com/harilvfs/carch/archive/refs/tags/v4.3.1.tar.gz
+	source = carch-4.3.2.tar.gz::https://github.com/harilvfs/carch/archive/refs/tags/v4.3.2.tar.gz
 	md5sums = SKIP
-	sha256sums = bb1ea4c3c61fc3a1b2685479a654b07df86cbafee954474c1c4eeecf32c7b93b
+	sha256sums = 15ed217cad89d83b06ce92c899c9d7403e5b735ecd4c978655395f23f73f1cdd
 
 pkgname = carch
