@@ -5,7 +5,7 @@ pkgrel=1
 pkgdesc="A Simple Script to Make Linux System Setups Easier"
 arch=('x86_64' 'aarch64')
 url="https://github.com/harilvfs/$pkgname"
-license=('GPL')
+license=('MIT')
 options=(!strip)
 depends=(
     'bash'
