@@ -3,7 +3,7 @@ pkgname=carch-git
 _pkgname=carch
 pkgver=v4.3.1.r2.g4ed8674
 pkgrel=1
-pkgdesc="An automated script for quick & easy Linux system setup (Arch & Fedora)"
+pkgdesc="A Simple Script to Make Linux System Setups Easier"
 arch=(any)
 url="https://github.com/harilvfs/$_pkgname"
 license=('GPL')
@@ -15,11 +15,9 @@ depends=(
     'fzf'
     'git'
     'wget'
-    'unzip'
     'figlet'
     'pacman'
     'noto-fonts-emoji'
-    'ttf-joypixels'
     'curl'
     'tree-sitter'
     'tree-sitter-bash'
@@ -28,10 +26,7 @@ depends=(
 )
 optdepends=(
     'bash-completion: for Bash completion support'
-    'zsh: for Zsh completion support'
-    'fish: for Fish completion support'
     'ttf-nerd-fonts-symbols: symbols and icons'
-    'ttf-jetbrains-mono: fonts'
     'ttf-jetbrains-mono-nerd: fonts'
 )
 
