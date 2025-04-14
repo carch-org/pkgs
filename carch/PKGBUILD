@@ -1,6 +1,6 @@
 # Maintainer: Hari Chalise <harilvfs@chalisehari.com.np>
 pkgname="carch"
-pkgver=4.3.2
+pkgver=4.3.3
 pkgrel=1
 pkgdesc="A Simple Script to Make Linux System Setups Easier"
 arch=('x86_64' 'aarch64')
@@ -32,7 +32,7 @@ conflicts=('carch-git')
 makedepends=('cargo')
 source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
 md5sums=('SKIP')
-sha256sums=('15ed217cad89d83b06ce92c899c9d7403e5b735ecd4c978655395f23f73f1cdd')
+sha256sums=('01b0dc7306f36f56001d07972c2e42b41111a9bd36c406c5a9032531b81075b8')
 
 prepare() {
   echo "Version=$pkgver" >> "$pkgname.desktop"
