@@ -51,7 +51,7 @@ prepare() {
     curl -sL "$_url_raw/refs/tags/$pkgver/completions/fish/carch.fish" -o "fish-completion-$pkgver"
     curl -sL "$_url_raw/refs/tags/$pkgver/completions/bash/carch" -o "bash-completion-$pkgver"
     
-    curl -sL "$_url_raw/refs/tags/$pkgver/README.md" -o "README-$pkgver.md"
+    curl -sL "$_url_raw/refs/heads/main/.github/README.md" -o "README-$pkgver.md"
     
     local sizes=(16 24 32 48 64 128 256)
     for size in "${sizes[@]}"; do
@@ -64,7 +64,7 @@ prepare() {
 package() {
     cd "$srcdir"
 
-    install -Dm0755 "$_pkgname-$pkgver" "$pkgdir/usr/local/bin/$_pkgname"
+    install -Dm0755 "$_pkgname-$pkgver" "$pkgdir/usr/bin/$_pkgname"
     
     install -Dm644 "$_pkgname-$pkgver.1" "$pkgdir/usr/share/man/man1/$_pkgname.1"
     install -Dm644 "LICENSE-$pkgver" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
