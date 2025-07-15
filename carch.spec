@@ -69,6 +69,4 @@ done
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 
 %changelog
-* Wed Jul 09 2025 Your Name <harilvfs@example.com> - 4.3.3-1
-- Enhanced dependency handling with Recommends and Suggests
-- Added post-install script for graceful dependency management
+* Wed Jul 16 2025 Your Name <harilvfs@chalisehari.com.np> - 5.2.2-1
