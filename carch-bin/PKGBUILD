@@ -57,8 +57,6 @@ prepare() {
     for size in "${sizes[@]}"; do
         curl -sL "$_url_raw/refs/heads/main/assets/icons/carch_logo_${size}.png" -o "icon${size}-$pkgver"
     done
-    
-    echo "Version=$pkgver" >> "$_pkgname-$pkgver.desktop"
 }
 
 package() {
