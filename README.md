@@ -1,7 +1,5 @@
 This repo is mainly dedicated to [Carch](https://github.com/harilvfs/carch) for building and installing the Carch package on Arch, Fedora, and openSUSE.
 
-For building rpm package for fedora and opensuse. you can see the spec file that is used to build rpm package. For your info opensuse also support rpms so this will work for both fedora and opensuse.
-
 ## Arch Linux
 
 For Arch, we provide a PKGBUILD that directly grabs the precompiled binary from the latest release.
