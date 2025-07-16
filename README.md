@@ -19,7 +19,7 @@ openSUSE supports RPMs, so the same process works for both.
 
 Below is a simple guide to build it yourself.
 
-### 1. Install RPM Build Dependencies
+### Install RPM Build Dependencies
 
 Install all the core tools:
 
@@ -34,13 +34,15 @@ Also install the core build tools for Carch:
 sudo dnf install cargo git
 ```
 
-### 2. Set Up the Build Tree
+### Set Up the Build Tree
 
 ```sh
 rpmdev-setuptree
 ```
 
-### 3. Get the Spec File
+> This will create the build directories in `~/rpmbuild`.
+
+### Get the Spec File
 
 Download the `carch.spec` file into `~/rpmbuild/SPECS/`
 
@@ -54,7 +56,7 @@ Change to the SPECS directory:
 cd ~/rpmbuild/SPECS
 ```
 
-### 4. Download the Source Files
+### Download the Source Files
 
 > Note: Make sure you are in `~/rpmbuild/SPECS/` before running this.
 
@@ -62,7 +64,7 @@ cd ~/rpmbuild/SPECS
 spectool -g -R carch.spec
 ```
 
-### 5. Build the RPM
+### Build the RPM
 
 ```sh
 rpmbuild -ba carch.spec
@@ -80,7 +82,7 @@ You will see the `.rpm` file if the build was successful.
 
 To avoid installation warnings (especially on openSUSE), it’s recommended to sign your RPMs.
 
-### 1. Create a GPG Key
+### Create a GPG Key
 
 ```sh
 gpg --full-generate-key
@@ -101,7 +103,7 @@ Or with long IDs:
 gpg --list-keys --keyid-format LONG
 ```
 
-### 2. Add Your GPG Name to RPM Macros
+### Add Your GPG Name to RPM Macros
 
 Edit (or create) `~/.rpmmacros`:
 
@@ -109,7 +111,7 @@ Edit (or create) `~/.rpmmacros`:
 echo '%_gpg_name Your Name <yourmailid@gmail.com>' >> ~/.rpmmacros
 ```
 
-### 3. Export & Import the Public Key
+### Export & Import the Public Key
 
 Export your public key:
 
@@ -129,7 +131,7 @@ Alternatively, import directly:
 sudo rpm --import <(gpg --export --armor yourkeyid)
 ```
 
-### 4. Sign the RPM
+### Sign the RPM
 
 Replace the filename with your actual RPM:
 
@@ -139,7 +141,7 @@ rpmsign --addsign ~/rpmbuild/RPMS/x86_64/carch-5.2.2-1.fc42.x86_64.rpm
 
 You’ll be asked for the passphrase you set when creating your GPG key.
 
-### 5. Verify the Signature
+### Verify the Signature
 
 ```sh
 rpm --checksig ~/rpmbuild/RPMS/x86_64/carch-5.2.2-1.fc42.x86_64.rpm
@@ -151,7 +153,7 @@ A successful result looks like:
 carch-5.2.2-1.fc42.x86_64.rpm: digests signatures OK
 ```
 
-### Install the RPM
+## Install the RPM
 
 ```sh
 sudo dnf install carch-5.2.2-1.fc42.x86_64.rpm
@@ -165,7 +167,7 @@ sudo zypper install carch-5.2.2-1.fc42.x86_64.rpm
 
 > [!IMPORTANT]
 > openSUSE may warn that the package is unsigned if it was signed on Fedora.
-> To avoid this, sign the RPM on openSUSE too — for example, using a container like distrobox.
+> To avoid this, sign the RPM on openSUSE too - for example, using a container like distrobox.
 > If you sign on openSUSE, the same RPM works fine on Fedora too.
 > If you only care about Fedora, signing on Fedora is enough.
 
