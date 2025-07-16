@@ -2,7 +2,7 @@
 
 _pkgname=carch
 pkgname="$_pkgname-bin"
-pkgver=v5.2.2
+pkgver=v5.2.3
 pkgrel=1
 pkgdesc="A simple Rust-based CLI tool (built with Ratatui) to streamline and automate your Linux system’s initial setup"
 arch=('x86_64' 'aarch64')
@@ -13,8 +13,8 @@ license=('MIT')
 source_x86_64=("$_pkgname-$pkgver::$url/releases/download/$pkgver/$_pkgname")
 source_aarch64=("$_pkgname-$pkgver::$url/releases/download/$pkgver/$_pkgname-aarch64")
 
-sha256sums_x86_64=('6f49e197dd5cd3c32c6341c8fe8d26167aaf6fe537970f87f44f19c2d6c23627')
-sha256sums_aarch64=('5dc71470152162fd91c45722d895099a918f615c9e1010053410d4a48eb4142e')
+sha256sums_x86_64=('654416231cccbc1881da40286effb03576ce0d1a13b9c25ec2ab63c33f82fe7f')
+sha256sums_aarch64=('11a69c0d5d7a5785bad7ddfe3eefb702c7bc6133364fddcd2861456764cdf625')
 
 depends=(
     'bash'
@@ -35,7 +35,6 @@ optdepends=(
     'ttf-jetbrains-mono-nerd: fonts'
 )
 
-conflicts=("$_pkgname")
 provides=("$_pkgname")
 
 prepare() {
