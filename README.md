@@ -113,6 +113,8 @@ echo '%_gpg_name Your Name <yourmailid@gmail.com>' >> ~/.rpmmacros
 
 ### Export & Import the Public Key
 
+> Note: Use your own key like this, don’t copy paste my key that will not work either.
+
 Export your public key:
 
 ```sh
