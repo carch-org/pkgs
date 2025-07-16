@@ -173,6 +173,12 @@ sudo zypper install carch-5.2.2-1.fc42.x86_64.rpm
 > If you sign on openSUSE, the same RPM works fine on Fedora too.
 > If you only care about Fedora, signing on Fedora is enough.
 
+Also, if you don’t want to sign, you can use `--allow-unsigned-rpm`:
+
+```sh
+sudo zypper install -y --allow-unsigned-rpm *.rpm
+```
+
 I will also release pre-signed RPM packages built on openSUSE in the Carch releases, so you can just grab those directly if you prefer.
 
 That’s it from my side!
