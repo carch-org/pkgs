@@ -70,3 +70,4 @@ done
 
 %changelog
 * Wed Jul 16 2025 Your Name <harilvfs@chalisehari.com.np> - 5.2.2-1
+- Refer to the full changelog: https://github.com/harilvfs/carch/blob/main/CHANGELOG.md
