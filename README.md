@@ -116,7 +116,7 @@ echo '%_gpg_name Your Name <yourmailid@gmail.com>' >> ~/.rpmmacros
 Export your public key:
 
 ```sh
-gpg --export --armor yourgpgkey > publickey.asc
+gpg --export --armor 36F67F5CD54828D7574F6FF39DE08866EE317104 > publickey.asc
 ```
 
 Import it into the RPM keyring:
@@ -128,7 +128,7 @@ sudo rpm --import publickey.asc
 Alternatively, import directly:
 
 ```sh
-sudo rpm --import <(gpg --export --armor yourkeyid)
+sudo rpm --import <(gpg --export --armor 36F67F5CD54828D7574F6FF39DE08866EE317104)
 ```
 
 ### Sign the RPM
