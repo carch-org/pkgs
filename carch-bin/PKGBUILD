@@ -20,13 +20,10 @@ depends=(
     'bash'
     'man-pages'
     'man-db'
-    'fzf'
     'git'
     'wget'
     'pacman'
     'curl'
-    'gcc-libs'
-    'glibc'
 )
 
 optdepends=(

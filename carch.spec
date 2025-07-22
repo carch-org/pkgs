@@ -13,10 +13,7 @@ Requires:       man
 Requires:       man-pages
 Requires:       git
 Requires:       wget
-Requires:       fzf
 Requires:       curl
-Requires:       gcc
-Requires:       glibc
 
 Suggests:       bash-completion-devel
 
