@@ -2,7 +2,7 @@
 
 _pkgname=carch
 pkgname="$_pkgname-bin"
-pkgver=v5.2.3
+pkgver=v5.2.4
 pkgrel=1
 pkgdesc="A simple Rust-based CLI tool (built with Ratatui) to streamline and automate your Linux system’s initial setup"
 arch=('x86_64' 'aarch64')
@@ -13,8 +13,8 @@ license=('MIT')
 source_x86_64=("$_pkgname-$pkgver::$url/releases/download/$pkgver/$_pkgname")
 source_aarch64=("$_pkgname-$pkgver::$url/releases/download/$pkgver/$_pkgname-aarch64")
 
-sha256sums_x86_64=('654416231cccbc1881da40286effb03576ce0d1a13b9c25ec2ab63c33f82fe7f')
-sha256sums_aarch64=('11a69c0d5d7a5785bad7ddfe3eefb702c7bc6133364fddcd2861456764cdf625')
+sha256sums_x86_64=('a7da503c418425b8de1b0d3f47239c4a328a045bb1fe81f93fc5d3bbd8e4427d')
+sha256sums_aarch64=('2205a0fd8b5003535770fad44d46c5016e1bebde784f0e52953b718fdce987c4')
 
 depends=(
     'bash'
