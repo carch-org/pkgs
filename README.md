@@ -127,12 +127,6 @@ Import it into the RPM keyring:
 sudo rpm --import publickey.asc
 ```
 
-Alternatively, import directly:
-
-```sh
-sudo rpm --import <(gpg --export --armor 36F67F5CD54828D7574F6FF39DE08866EE317104)
-```
-
 ### Sign the RPM
 
 Replace the filename with your actual RPM:
