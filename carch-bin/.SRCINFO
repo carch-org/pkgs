@@ -1,6 +1,6 @@
 pkgbase = carch-bin
 	pkgdesc = A simple Rust-based CLI tool (built with Ratatui) to streamline and automate your Linux system’s initial setup
-	pkgver = v5.2.5
+	pkgver = v5.2.6
 	pkgrel = 1
 	url = https://github.com/harilvfs/carch
 	arch = x86_64
@@ -17,9 +17,9 @@ pkgbase = carch-bin
 	optdepends = ttf-jetbrains-mono: fonts
 	optdepends = ttf-jetbrains-mono-nerd: fonts
 	provides = carch
-	source_x86_64 = carch-v5.2.5::https://github.com/harilvfs/carch/releases/download/v5.2.5/carch
-	sha256sums_x86_64 = 95e274be931b97983ab6d0322bb1cb6597fee956ce156fc77888e06237d08af0
-	source_aarch64 = carch-v5.2.5::https://github.com/harilvfs/carch/releases/download/v5.2.5/carch-aarch64
-	sha256sums_aarch64 = 4a47e453469dca48588d262af02ce34091cdb28320d854abbcfa8152a8e86435
+	source_x86_64 = carch-v5.2.6::https://github.com/harilvfs/carch/releases/download/v5.2.6/carch
+	sha256sums_x86_64 = 9e3704626229e8fd5867f4a3ece5d8065135724efe9ad3e797f71a9af66d74da
+	source_aarch64 = carch-v5.2.6::https://github.com/harilvfs/carch/releases/download/v5.2.6/carch-aarch64
+	sha256sums_aarch64 = fae4b71d24815397bba3ed3836135b025239fd3be10190b2f71c85c4a850d6b4
 
 pkgname = carch-bin
