@@ -8,14 +8,7 @@ Source0:        %{URL}/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.
 
 BuildRequires:  cargo
 
-Requires:       bash
-Requires:       man
-Requires:       man-pages
 Requires:       git
-Requires:       wget
-Requires:       curl
-
-Suggests:       bash-completion-devel
 
 %description
 Carch is a simple CLI tool to help automating linux system setups. It provides a convenient way to install and

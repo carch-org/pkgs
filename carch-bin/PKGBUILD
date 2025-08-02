@@ -16,21 +16,9 @@ source_aarch64=("$_pkgname-$pkgver::$url/releases/download/$pkgver/$_pkgname-aar
 sha256sums_x86_64=('9e3704626229e8fd5867f4a3ece5d8065135724efe9ad3e797f71a9af66d74da')
 sha256sums_aarch64=('fae4b71d24815397bba3ed3836135b025239fd3be10190b2f71c85c4a850d6b4')
 
-depends=(
-    'bash'
-    'man-pages'
-    'man-db'
-    'git'
-    'wget'
-    'pacman'
-    'curl'
-)
+depends=('git' 'pacman')
 
-optdepends=(
-    'ttf-nerd-fonts-symbols: symbols and icons'
-    'ttf-jetbrains-mono: fonts'
-    'ttf-jetbrains-mono-nerd: fonts'
-)
+optdepends=('ttf-nerd-fonts-symbols: symbols and icons')
 
 provides=("$_pkgname")
 
