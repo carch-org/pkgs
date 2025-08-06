@@ -132,7 +132,7 @@ sudo rpm --import publickey.asc
 Replace the filename with your actual RPM:
 
 ```sh
-rpmsign --addsign ~/rpmbuild/RPMS/x86_64/carch-5.2.2-1.fc42.x86_64.rpm
+rpmsign --addsign ~/rpmbuild/RPMS/x86_64/carch-5.3.1-1.fc42.x86_64.rpm
 ```
 
 You’ll be asked for the passphrase you set when creating your GPG key.
@@ -140,25 +140,25 @@ You’ll be asked for the passphrase you set when creating your GPG key.
 ### Verify the Signature
 
 ```sh
-rpm --checksig ~/rpmbuild/RPMS/x86_64/carch-5.2.2-1.fc42.x86_64.rpm
+rpm --checksig ~/rpmbuild/RPMS/x86_64/carch-5.3.1-1.fc42.x86_64.rpm
 ```
 
 A successful result looks like: 
 
 ```sh
-carch-5.2.2-1.fc42.x86_64.rpm: digests signatures OK
+carch-5.3.1-1.fc42.x86_64.rpm: digests signatures OK
 ```
 
 ## Install the RPM
 
 ```sh
-sudo dnf install carch-5.2.2-1.fc42.x86_64.rpm
+sudo dnf install carch-5.3.1-1.fc42.x86_64.rpm
 ```
 
 Or on openSUSE:
 
 ```sh
-sudo zypper install carch-5.2.2-1.fc42.x86_64.rpm
+sudo zypper install carch-5.3.1-1.fc42.x86_64.rpm
 ```
 
 > [!IMPORTANT]
