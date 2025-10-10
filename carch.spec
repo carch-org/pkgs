@@ -1,7 +1,7 @@
 Name:           carch
-Version:        5.3.1 
+Version:        5.3.2 
 Release:        1%{?dist}
-Summary:        A simple Rust-based CLI tool (built with Ratatui) to streamline and automate your Linux system’s initial setup. 
+Summary:        A simple Rust-based CLI tool to streamline and automate your Linux system’s initial setup. 
 License:        MIT 
 URL:            https://github.com/harilvfs/%{name}
 Source0:        %{URL}/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
@@ -59,5 +59,5 @@ done
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 
 %changelog
-* Wed Aug 06 2025 Hari Chalise <harilvfs@chalisehari.com.np> - 5.3.1-1
+* Fri Oct 10 2025 Hari Chalise <harilvfs@chalisehari.com.np> - 5.3.2-1
 - Refer to the full changelog: https://github.com/harilvfs/carch/blob/main/CHANGELOG.md

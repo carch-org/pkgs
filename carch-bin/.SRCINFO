@@ -1,6 +1,6 @@
 pkgbase = carch-bin
-	pkgdesc = A simple Rust-based CLI tool (built with Ratatui) to streamline and automate your Linux system’s initial setup
-	pkgver = v5.3.1
+	pkgdesc = A simple Rust-based CLI tool to streamline and automate your Linux system’s initial setup
+	pkgver = v5.3.2
 	pkgrel = 1
 	url = https://github.com/harilvfs/carch
 	arch = x86_64
@@ -10,9 +10,9 @@ pkgbase = carch-bin
 	depends = pacman
 	optdepends = ttf-nerd-fonts-symbols: symbols and icons
 	provides = carch
-	source_x86_64 = carch-v5.3.1::https://github.com/harilvfs/carch/releases/download/v5.3.1/carch
-	sha256sums_x86_64 = 5c2e185491da1f2d4e80a9fb6574bd01237c1b891927e0448df7f1709a9d197f
-	source_aarch64 = carch-v5.3.1::https://github.com/harilvfs/carch/releases/download/v5.3.1/carch-aarch64
-	sha256sums_aarch64 = 378d37f8f8eb63bcf5035703b3f1d5cd43f4d811a6562d0339e10bcdb74cd85b
+	source_x86_64 = carch-v5.3.2::https://github.com/harilvfs/carch/releases/download/v5.3.2/carch
+	sha256sums_x86_64 = c68a97269fcefa234b98990a0ae93b2c2f35604de6e6de1fb62cec360b7cffd3
+	source_aarch64 = carch-v5.3.2::https://github.com/harilvfs/carch/releases/download/v5.3.2/carch-aarch64
+	sha256sums_aarch64 = 8773944b0a22bcb8935d94e9d8638aecc75241816a629be63749f2eb57b7df77
 
 pkgname = carch-bin
