@@ -1,5 +1,5 @@
 Name:           carch
-Version:        5.3.3 
+Version:        5.3.4 
 Release:        1%{?dist}
 Summary:        A simple Rust-based CLI tool to streamline and automate your Linux system’s initial setup. 
 License:        MIT 
@@ -59,5 +59,5 @@ done
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 
 %changelog
-* Wed Feb 25 2026 Hari Chalise <harilvfs@chalisehari.com.np> - 5.3.3-1
+* Sun Mar 01 2026 Hari Chalise <harilvfs@chalisehari.com.np> - 5.3.4-1
 - Refer to the full changelog: https://github.com/harilvfs/carch/blob/main/CHANGELOG.md
