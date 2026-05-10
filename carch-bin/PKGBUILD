@@ -2,7 +2,7 @@
 
 _pkgname=carch
 pkgname="$_pkgname-bin"
-pkgver=v5.3.4
+pkgver=v5.3.5
 pkgrel=1
 pkgdesc="A simple Rust-based CLI tool to streamline and automate your Linux system’s initial setup"
 arch=('x86_64' 'aarch64')
@@ -13,8 +13,8 @@ license=('MIT')
 source_x86_64=("$_pkgname-$pkgver::$url/releases/download/$pkgver/$_pkgname")
 source_aarch64=("$_pkgname-$pkgver::$url/releases/download/$pkgver/$_pkgname-aarch64")
 
-sha256sums_x86_64=('b6d284846ab381c96c4e07881f19c52e671ca8fa33a9556e8f49f6e5266025ab')
-sha256sums_aarch64=('e699ec47149b904fe9ad611e21bcf0c7df234a4ff70717d38a9dfecad1268592')
+sha256sums_x86_64=('fb7b23511703e5ee6b5183d10517c2ea9973962eef0060c9f1d83ffc4ae67373')
+sha256sums_aarch64=('1cdadec9f5b7e34c0b226d4b558e1994c616776ea3abbffe0403af6161ca1077')
 
 depends=('git' 'pacman')
 
