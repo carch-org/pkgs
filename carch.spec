@@ -1,7 +1,7 @@
 Name:           carch
 Version:        5.3.5 
 Release:        1%{?dist}
-Summary:        A simple Rust-based CLI tool to streamline and automate your Linux system’s initial setup. 
+Summary:        A Rust-based CLI tool to streamline and automate your Linux system’s initial setup. 
 License:        MIT 
 URL:            https://github.com/harilvfs/%{name}
 Source0:        %{URL}/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
