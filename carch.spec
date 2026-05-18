@@ -19,7 +19,7 @@ configure packages and system settings.
 
 %build
 export CARGO_TARGET_DIR=build
-cargo build --frozen --release --all-features
+cargo build --release --all-features
 
 %install
 mkdir -p %{buildroot}%{_bindir}
@@ -57,7 +57,3 @@ done
 %{_datadir}/zsh/site-functions/_%{name}
 %{_datadir}/fish/vendor_completions.d/%{name}.fish
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
-
-%changelog
-* Sun May 11 2026 Hari Chalise <harilvfs@chalisehari.com.np> - 5.3.5-1
-- Refer to the full changelog: https://github.com/harilvfs/carch/blob/main/CHANGELOG.md
