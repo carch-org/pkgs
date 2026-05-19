@@ -1,4 +1,4 @@
-This repo is mainly dedicated to [Carch](https://github.com/harilvfs/carch) for building and installing the Carch package on Arch, Fedora, and openSUSE.
+This repo is mainly dedicated to [Carch](https://github.com/harilvfs/carch) for building and installing the Carch package on Arch, Fedora, openSUSE and Termux.
 
 ## Arch Linux
 
@@ -81,6 +81,9 @@ You will see the `.rpm` file if the build was successful.
 ## Add GPG Signature (Recommended)
 
 To avoid installation warnings (especially on openSUSE), it’s recommended to sign your RPMs.
+
+<details>
+<summary>Click to expand</summary>
 
 ### Create a GPG Key
 
@@ -167,14 +170,29 @@ sudo zypper install carch-5.3.1-1.fc42.x86_64.rpm
 > If you sign on openSUSE, the same RPM works fine on Fedora too.
 > If you only care about Fedora, signing on Fedora is enough.
 
-Also, if you don’t want to sign, you can use `--allow-unsigned-rpm`:
+<details>
+
+Also, if you don’t want to sign, you can use `--allow-unsigned-rpm` for openSUSE:
 
 ```sh
 sudo zypper install -y --allow-unsigned-rpm *.rpm
 ```
 
-I will also release pre-signed RPM packages built on openSUSE in the Carch releases, so you can just grab those directly if you prefer.
+For Fedora, even if it is not signed, there is no warning, so no issue at all in Fedora-based distros.
 
-That’s it from my side!
-If you notice anything missing or incorrect, feel free to contribute a fix.
-Thank you!
+### Termux
+
+Basically we are using the script `build-termux-deb.sh` to build a .deb file that is compatible with Termux environment. You can just run that script to build on your local machine. Make sure you have `dpkg` installed on your distro before running the script. Dpkg is needed to build a .deb file especially for Debian or Termux env, as Termux uses deb packages like Debian.
+
+Clone the repo and run the script.
+
+```sh
+git clone https://github.com/carch-org/pgks && cd pkgs
+./build-termux-deb.sh
+```
+
+This deb file doesn't compile the Carch to build deb, instead it uses already compiled arm & aarch64 binary from Carch release and builds a .deb file that can be installed via `dpkg -i *.deb` or directly `pkg install *.deb`
+
+You can find those .deb files in [Carch release](https://github.com/harilvfs/carch/releases/latest)
+
+> If anything from my side I am doing or telling is wrong, or anything else, you can open an issue for that.
