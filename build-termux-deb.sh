@@ -2,7 +2,7 @@
 set -e
 
 PKGNAME="carch"
-PKGVER="${PKGVER:-5.3.5}"
+PKGVER="${PKGVER:-5.3.6}"
 PKGVER="${PKGVER#v}"
 PKGREL="1"
 ARCH="${1:-aarch64}"  # aarch64 or arm

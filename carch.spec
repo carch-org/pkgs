@@ -1,5 +1,5 @@
 Name:           carch
-Version:        5.3.5 
+Version:        5.3.6 
 Release:        1%{?dist}
 Summary:        A Rust-based CLI tool to streamline and automate your Linux system’s initial setup. 
 License:        MIT 
@@ -11,7 +11,7 @@ BuildRequires:  cargo
 Requires:       git
 
 %description
-Carch is a simple CLI tool to help automating linux system setups. It provides a convenient way to install and
+Carch is a CLI tool to help automating linux system setups. It provides a convenient way to install and
 configure packages and system settings.
 
 %prep
