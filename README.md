@@ -164,13 +164,12 @@ Or on openSUSE:
 sudo zypper install carch-5.3.1-1.fc42.x86_64.rpm
 ```
 
-> [!IMPORTANT]
 > openSUSE may warn that the package is unsigned if it was signed on Fedora.
 > To avoid this, sign the RPM on openSUSE too.
 > If you sign on openSUSE, the same RPM works fine on Fedora too.
 > If you only care about Fedora, signing on Fedora is enough.
 
-<details>
+</details>
 
 Also, if you don’t want to sign, you can use `--allow-unsigned-rpm` for openSUSE:
 
