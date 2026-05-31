@@ -2,7 +2,7 @@
 set -e
 
 PKGNAME="carch"
-PKGVER="${PKGVER:-5.3.6}"
+PKGVER="${PKGVER:-5.3.7}"
 PKGVER="${PKGVER#v}"
 PKGREL="1"
 ARCH="${1:-aarch64}"  # aarch64 or arm
@@ -55,10 +55,9 @@ Architecture: ${ARCH}
 Maintainer: Hari Chalise <harilvfs@chalisehari.com.np>
 Installed-Size: ${INSTALLED_SIZE}
 Depends: git
-Description: A Rust-based CLI tool for Linux system setup
- carch streamlines and automates your Linux system's initial setup.
- It provides an interactive menu to install packages, configure
- dotfiles, and set up your environment quickly.
+Description: A CLI tool streamlines and automates Linux system's initial setup.
+ It provides an interactive TUI to install packages, configure
+ system, and set up environment quickly.
 Homepage: https://github.com/harilvfs/carch
 Section: utils
 Priority: optional

@@ -2,9 +2,9 @@
 
 _pkgname=carch
 pkgname="$_pkgname-bin"
-pkgver=v5.3.6
+pkgver=v5.3.7
 pkgrel=1
-pkgdesc="A Rust-based CLI tool to streamline and automate your Linux system’s initial setup"
+pkgdesc="A CLI tool to streamline and automate Linux system’s initial setup"
 arch=('x86_64' 'aarch64')
 url="https://github.com/harilvfs/$_pkgname"
 _url_raw="https://raw.githubusercontent.com/$(echo "$url" | awk -F'/' '{print $4 "/" $5}')"
@@ -13,8 +13,8 @@ license=('MIT')
 source_x86_64=("$_pkgname-$pkgver::$url/releases/download/$pkgver/$_pkgname")
 source_aarch64=("$_pkgname-$pkgver::$url/releases/download/$pkgver/$_pkgname-aarch64")
 
-sha256sums_x86_64=('10bf7cfb67c9da30acf9194c8187ac515168d317b4f12330b67331e8c2bfd005')
-sha256sums_aarch64=('36c3417a9484f6857e61969cd7be13f22de7425887a58a5f2296a013bfaa1c7e')
+sha256sums_x86_64=('446b088d720c9e706f4693f01f019f2ef115635774364811cb9122039a16f1ee')
+sha256sums_aarch64=('0a80f07b12b320ef0949776a1adaa3a9de9e461019e8c36f9b6e78be74e9272a')
 
 depends=('git' 'pacman')
 
