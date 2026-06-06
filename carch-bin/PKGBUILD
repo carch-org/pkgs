@@ -2,7 +2,7 @@
 
 _pkgname=carch
 pkgname="$_pkgname-bin"
-pkgver=v5.3.7
+pkgver=v5.4.1
 pkgrel=1
 pkgdesc="A CLI tool to streamline and automate Linux system’s initial setup"
 arch=('x86_64' 'aarch64')
@@ -13,8 +13,8 @@ license=('MIT')
 source_x86_64=("$_pkgname-$pkgver::$url/releases/download/$pkgver/$_pkgname")
 source_aarch64=("$_pkgname-$pkgver::$url/releases/download/$pkgver/$_pkgname-aarch64")
 
-sha256sums_x86_64=('446b088d720c9e706f4693f01f019f2ef115635774364811cb9122039a16f1ee')
-sha256sums_aarch64=('0a80f07b12b320ef0949776a1adaa3a9de9e461019e8c36f9b6e78be74e9272a')
+sha256sums_x86_64=('6261e81dffcff62afa541810bf218dce40d040ed78b8df0915631b789a30cac2')
+sha256sums_aarch64=('dffe3beb1730e40c06b87b13d49bb2afd48e2f159a20672a4baffc3614d97f01')
 
 depends=('git' 'pacman')
 

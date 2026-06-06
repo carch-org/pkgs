@@ -1,5 +1,5 @@
 Name:           carch
-Version:        5.3.7 
+Version:        5.4.1 
 Release:        1%{?dist}
 Summary:        A CLI tool to streamline and automate Linux system’s initial setup. 
 License:        MIT 
