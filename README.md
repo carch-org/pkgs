@@ -1,3 +1,6 @@
+> [!NOTE]
+> Due to the recent changes to carch repo, as we are using global way via direct install script, so I am deprecating this repo as this will not be used to build carch. Check [carch](https://github.com/harilvfs/carch) repo for more.
+
 This repo is mainly dedicated to [Carch](https://github.com/harilvfs/carch) for building and installing the Carch package on Arch, Fedora, openSUSE and Termux.
 
 ## Arch Linux
